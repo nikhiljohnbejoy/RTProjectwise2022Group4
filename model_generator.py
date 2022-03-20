@@ -1,18 +1,18 @@
 #For image data preprocessing
 from keras.preprocessing import image
 from keras.models import Sequential
-from keras.layers import Dropout,Conv2D,Flatten,Dense, MaxPooling2D
+from keras.layers import Dense, MaxPooling2D,Dropout,Conv2D,Flatten
 
 #ImageDataGenerator generates batches of tensor image data with real-time data augmentation
 generator=image.ImageDataGenerator(rescale=1./255)
-BatchSize= 32
-TargetSize=(24,24)
+size_batch= 32
+size_target=(24,24)
 #Takes the path to training directory & generates batches of augmented data.
-train_batch= generator.flow_from_directory('eyes_dataset/train',batch_size=BatchSize,shuffle=True,color_mode='grayscale',class_mode='categorical', target_size=TargetSize)
+train_batch= generator.flow_from_directory('eyes_dataset/train',batch_size=size_batch,shuffle=True,color_mode='grayscale',class_mode='categorical', target_size=size_target)
 #Takes the path to validation directory & generates batches of augmented data.
-valid_batch= generator.flow_from_directory('eyes_dataset/test',batch_size=BatchSize,shuffle=True,color_mode='grayscale',class_mode='categorical', target_size=TargetSize)
-SPE= len(train_batch.classes)//BatchSize
-VS = len(valid_batch.classes)//BatchSize
+valid_batch= generator.flow_from_directory('eyes_dataset/test',batch_size=size_batch,shuffle=True,color_mode='grayscale',class_mode='categorical', target_size=size_target)
+SPE= len(train_batch.classes)//size_batch
+VS = len(valid_batch.classes)//size_batch
 
 model = Sequential([
     Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(24,24,1)),

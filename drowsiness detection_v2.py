@@ -60,24 +60,24 @@ while(True):
 
 
     for (x,y,w,h) in right_eye:
-        r_eye=frame_ROI[y:y+h,x:x+w]
-        r_eye = cv2.cvtColor(r_eye,cv2.COLOR_BGR2GRAY)
-        r_eye = cv2.resize(r_eye,(24,24))
-        r_eye= r_eye/255
-        r_eye=  r_eye.reshape(24,24,-1)
-        r_eye = np.expand_dims(r_eye,axis=0)
-        predict_r=model.predict(r_eye)
+        driver_right_eye=frame_ROI[y:y+h,x:x+w]
+        driver_right_eye = cv2.cvtColor(driver_right_eye,cv2.COLOR_BGR2GRAY)
+        driver_right_eye = cv2.resize(driver_right_eye,(24,24))
+        driver_right_eye= driver_right_eye/255
+        driver_right_eye=  driver_right_eye.reshape(24,24,-1)
+        driver_right_eye = np.expand_dims(driver_right_eye,axis=0)
+        predict_r=model.predict(driver_right_eye)
         rpred=np.argmax(predict_r,axis=1)
         break
 
     for (x,y,w,h) in left_eye:
-        l_eye=frame_ROI[y:y+h,x:x+w]
-        l_eye = cv2.cvtColor(l_eye,cv2.COLOR_BGR2GRAY)
-        l_eye = cv2.resize(l_eye,(24,24))
-        l_eye= l_eye/255
-        l_eye=l_eye.reshape(24,24,-1)
-        l_eye = np.expand_dims(l_eye,axis=0)
-        predict_l=model.predict(l_eye)
+        driver_left_eye=frame_ROI[y:y+h,x:x+w]
+        driver_left_eye = cv2.cvtColor(driver_left_eye,cv2.COLOR_BGR2GRAY)
+        driver_left_eye = cv2.resize(driver_left_eye,(24,24))
+        driver_left_eye= driver_left_eye/255
+        driver_left_eye=driver_left_eye.reshape(24,24,-1)
+        driver_left_eye = np.expand_dims(driver_left_eye,axis=0)
+        predict_l=model.predict(driver_left_eye)
         lpred=np.argmax(predict_l,axis=1)
         break
 
